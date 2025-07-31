@@ -1,14 +1,18 @@
+from os import write
+
+
 def menu():
-    print("\n - - - - MENÚ - - - -\n1. Calcular el MCD de dos números\n2. Cadena repetida N veces\n3. Contar cuantas veces aparece una letra\n4. Convertir un número decimal a binario\n5. Calcular cuantos digitos tiene un número\n6. Salir")
+    print("\n - - - - MENÚ - - - -\n1. Calcular el MCD de dos números\n2. Cadena repetida N veces\n3. Contar cuántas veces aparece una letra\n4. Convertir un número decimal a binario\n5. Calcular cuántos dígitos tiene un número\n6. Salir")
 
 def calcularMCD():
     while True:
         try:
-            n1 = int(input("Ingrese el primer número: "))
+            n1 = int(input("\nIngrese el primer número: "))
             if n1 > 0:
                 n2 = int(input("Ingrese el segundo número: "))
                 if n2 > 0:
                     print(f"El MCD de {n1} y {n2} es: {calculoMCD(n1, n2)}")
+                    break
             else:
                 print("El 0 no está permitido ")
         except Exception as ex:
@@ -45,10 +49,10 @@ def repetirCadena(cadena, veces):
 
 def contarLetra():
     while True:
-        cadena = input("\nIngrese una palabra: ")
+        cadena = input("\nIngrese una palabra: ").lower()
         if cadena or cadena.isspace():
             while True:
-                letra = input("Ingrese una letra: ")
+                letra = input("Ingrese una letra: ").lower()
                 if len(letra) == 1:
                     print(f"La letra {letra} aparece {letraContada(cadena,letra)} veces")
                     break
@@ -66,6 +70,47 @@ def letraContada(cadena, letra, contador = 0, aux = 0):
             aux = aux + 1
         return letraContada(cadena, letra, contador + 1, aux)
 
+def convertirBinario():
+    while True:
+        try:
+            n = int(input("\nIngrese un número para convertirlo a binario: "))
+            if n > 0:
+                print(f"El número {n} en binario es: {binario(n)}")
+                break
+            else:
+                print("El número ingresado no es válido, reintente")
+        except Exception as ex:
+            print(f"Ha ocurrido un error: {ex}")
+
+def binario(n, listaBinario = []):
+    if n == 0:
+        listaBinario.reverse()
+        return listaBinario
+    else:
+        if n % 2 == 0:
+            listaBinario.append(0)
+        else:
+            listaBinario.append(1)
+        return binario(n // 2, listaBinario)
+
+def contarDigitos():
+    while True:
+        try:
+            n = int(input("\nIngrese un número: "))
+            if n > 0:
+                print(f"El número {n} tiene {contadorDig(n)} dígitos")
+                break
+            else:
+                print("No es valido el número")
+        except Exception as ex:
+            print(f"Ha ocurrido un error: {ex}")
+
+def contadorDig(n, cont = 0):
+    if n == 0:
+        return cont
+    else:
+        return contadorDig(n // 10, cont + 1)
+
 def main():
     while True:
         try:
@@ -79,9 +124,9 @@ def main():
                 case 3:
                     contarLetra()
                 case 4:
-                    print("Opción 4")
+                    convertirBinario()
                 case 5:
-                    print("Opción 5")
+                    contarDigitos()
                 case 6:
                     print("Saliendo . . .")
                     break
