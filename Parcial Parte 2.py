@@ -8,7 +8,6 @@ def calcularMCD():
             if n1 > 0:
                 n2 = int(input("Ingrese el segundo número: "))
                 if n2 > 0:
-                    calculoMCD(n1, n2)
                     print(f"El MCD de {n1} y {n2} es: {calculoMCD(n1, n2)}")
             else:
                 print("El 0 no está permitido ")
@@ -22,7 +21,27 @@ def calculoMCD(n1, n2):
 
 def cadenaRepetida():
     while True:
-        cadena = input("Ingrese una palabra: ")
+        cadena = input("\nIngrese una palabra: ")
+        if cadena or cadena.isspace():
+            while True:
+                try:
+                    veces = int(input("Ingrese las veces que se repetira la palabra: "))
+                    if veces > 0:
+                        print(f"La cadena repetida {veces} veces es: {repetirCadena(cadena,veces)}")
+                        break
+                    else:
+                        print("Dato inválido de veces, reintente")
+                except Exception as ex:
+                    print(f"Ha ocurrido un error: {ex}")
+            break
+        else:
+            print("La palabra no es valida")
+
+def repetirCadena(cadena, veces):
+    if veces == 0:
+        return ""
+    else:
+        return cadena + repetirCadena(cadena, veces - 1)
 
 def main():
     while True:
