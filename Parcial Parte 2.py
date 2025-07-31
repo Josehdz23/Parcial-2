@@ -35,13 +35,36 @@ def cadenaRepetida():
                     print(f"Ha ocurrido un error: {ex}")
             break
         else:
-            print("La palabra no es valida")
+            print("La palabra no es valida, reintente")
 
 def repetirCadena(cadena, veces):
     if veces == 0:
         return ""
     else:
         return cadena + repetirCadena(cadena, veces - 1)
+
+def contarLetra():
+    while True:
+        cadena = input("\nIngrese una palabra: ")
+        if cadena or cadena.isspace():
+            while True:
+                letra = input("Ingrese una letra: ")
+                if len(letra) == 1:
+                    print(f"La letra {letra} aparece {letraContada(cadena,letra)} veces")
+                    break
+                else:
+                    print("Solo debe de ser una letra, reintente")
+            break
+        else:
+            print("La palabra no es valida, reintente")
+
+def letraContada(cadena, letra, contador = 0, aux = 0):
+    if contador == len(cadena):
+        return aux
+    else:
+        if letra == cadena[contador]:
+            aux = aux + 1
+        return letraContada(cadena, letra, contador + 1, aux)
 
 def main():
     while True:
@@ -54,7 +77,7 @@ def main():
                 case 2:
                     cadenaRepetida()
                 case 3:
-                    print("Opción 3")
+                    contarLetra()
                 case 4:
                     print("Opción 4")
                 case 5:
